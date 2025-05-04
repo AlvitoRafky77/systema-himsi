@@ -17,7 +17,7 @@
 
     {{-- PRODUK SECTION --}}
     <div id="produk" class="container mt-5">
-        <div class="p-4" style="background-color: #F0EBE1; border: 2px solid #E0E0E0; border-radius: 16px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <div class="p-4" style="background-color: #c6e7ff; border: 2px solid #E0E0E0; border-radius: 16px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
             <h2 class="text-center fw-bold mb-4">PRODUK KAMI</h2>
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 @forelse ($products as $product)
@@ -43,12 +43,12 @@
     {{-- KELUARGA HIMSI SECTION --}}
     <div class="mt-5">
         <hr>
-        <div class="container py-5" style="background-color: #F0EBE1; border-radius: 16px; max-width: 1100px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <div class="container py-5" style="background-color: #c6e7ff; border-radius: 16px; max-width: 1100px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
             <div class="row align-items-center g-4">
                 <div class="col-md-6">
                     <span class="badge bg-danger text-white mb-2" style="font-size: 0.9rem;">TENTANG KAMI</span>
                     <h2 class="fw-bold mb-3">KELUARGA HIMSI</h2>
-                    <p style="font-size: 1rem; color: #6c757d;">
+                    <p style="font-size: 1rem; color: #37393b;">
                         HIMSI adalah organisasi mahasiswa Sistem Informasi yang berfokus pada pengembangan potensi, aspirasi, dan kolaborasi antar mahasiswa dalam suasana yang profesional dan inovatif.
                     </p>
                     <a href="{{route('about')}}" class="btn btn-outline-primary mt-3">READ MORE</a>
@@ -73,9 +73,9 @@
     {{-- REVIEW PRODUK SECTION --}}
     <div class="mt-5">
         <hr>
-        <div class="container py-5" style="background-color: #E3F2FD; border-radius: 16px; max-width: 1100px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <div class="container py-5" style="background-color: #c6e7ff; border-radius: 16px; max-width: 1100px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
             <h2 class="text-center fw-bold mb-2" style="font-size: 2rem;">REVIEW PRODUK</h2>
-            <p class="text-center mb-4" style="font-size: 1rem; color: #6c757d;">Testimoni Dari Pelanggan Kami</p>
+            <p class="text-center mb-4" style="font-size: 1rem; color: #37393b;">Testimoni Dari Pelanggan Kami</p>
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 {{-- Review 1 --}}
                 <div class="col">
