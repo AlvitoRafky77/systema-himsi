@@ -93,9 +93,9 @@
                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
                         <h5 class="text-uppercase mb-4 fw-bold text-warning">Produk</h5>
                         <ul class="list-unstyled mb-0">
-                            <li class="mb-2"> <a href="#" class="text-white text-decoration-none">Merchandise</a> </li>
-                            <li class="mb-2"> <a href="#" class="text-white text-decoration-none">Makanan</a> </li>
-                            <li class="mb-2"> <a href="#" class="text-white text-decoration-none">Minuman</a> </li>
+                            <li class="mb-2"> <a href="{{ route('produk.merchandise') }}" class="text-white text-decoration-none">Merchandise</a> </li>
+                            <li class="mb-2"> <a href="{{ route('produk.makanan') }}" class="text-white text-decoration-none">Makanan</a> </li>
+                            <li class="mb-2"> <a href="{{ route('produk.minuman') }}" class="text-white text-decoration-none">Minuman</a> </li>
                         </ul>
                     </div>
 
@@ -122,6 +122,10 @@
                                 <img src="{{ asset('images/Instagram.png') }}" alt="Instagram" height="20" class="me-2">
                                 <a href="https://www.instagram.com/himsi_telujkt?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="text-white text-decoration-none">himsi_telujkt</a>
                             </li>
+                            <li class="mb-2 d-flex align-items-center">
+                                <img src="{{ asset('images/Linkedin.jpg') }}" alt="LinkedIn" height="20" class="me-2">
+                                <a href="https://www.linkedin.com/company/himpunan-mahasiwa-sistem-informasi-jakarta/" target="_blank" class="text-white text-decoration-none">Himsi Telu Jakarta</a>
+                            </li>
                         </ul>
                     </div>
                 </div>

@@ -62,7 +62,8 @@
         <nav class="navbar navbar-expand-md shadow-sm justify-content-center align-items-center">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
-                    Admin Panel
+                    <img src="{{ asset('images/HIMSI LOGO.png') }}" height="50" class="me-2 align-middle">
+                    Admin Panel Systema HIMSI
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
