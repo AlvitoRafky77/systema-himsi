@@ -26,7 +26,7 @@
                 <p class="animated-paragraph" style="font-family: 'Montserrat', sans-serif; color: #666; line-height: 1.7;">
                 Produk kami merupakan hasil kreativitas mahasiswa Sistem Informasi yang dikemas dengan desain menarik, harga terjangkau, dan kualitas terbaik. Dengan membeli, kamu tidak hanya mendapatkan produk unik, tapi juga turut mendukung UMKM kampus dan semangat wirausaha mahasiswa.
                 </p>
-           
+
                 <p class="text-center mt-4 animated-paragraph" style="font-family: 'Montserrat', sans-serif; font-weight: bold; color: #333;">
                     <strong>"Bersama HIMSI, Kita Berkarya dan Berinovasi!"</strong>
                 </p>
