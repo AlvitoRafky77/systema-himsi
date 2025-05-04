@@ -3,6 +3,16 @@
 @section('title', 'Login')
 
 @section('content')
+@if (session('success'))
+    <div class="alert alert-success text-center">
+        {{ session('success') }}
+    </div>
+@endif
+@if (session('error'))
+    <div class="alert alert-danger text-center">
+        {{ session('error') }}
+    </div>
+@endif
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
     <div class="card shadow-sm p-4" style="width: 100%; max-width: 400px; border-radius: 16px;">
         <h1 class="text-center mb-4">Login</h1>
