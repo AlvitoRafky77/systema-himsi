@@ -124,7 +124,7 @@
                             </li>
                             <li class="mb-2 d-flex align-items-center">
                                 <img src="{{ asset('images/Linkedin.jpg') }}" alt="LinkedIn" height="20" class="me-2">
-                                <a href="https://www.linkedin.com/company/himpunan-mahasiwa-sistem-informasi-jakarta/" target="_blank" class="text-white text-decoration-none">Himsi Telu Jakarta</a>
+                                <a href="https://www.linkedin.com/company/himpunan-mahasiwa-sistem-informasi-jakarta/" target="_blank" class="text-white text-decoration-none">Himsi Tel-u Jakarta</a>
                             </li>
                         </ul>
                     </div>
