@@ -71,29 +71,59 @@
     </div>
 
     {{-- REVIEW PRODUK SECTION --}}
-    <div class="mt-5">
-        <hr>
-        <div class="container py-5" style="background-color: #c6e7ff; border-radius: 16px; max-width: 1100px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-            <h2 class="text-center fw-bold mb-2" style="font-size: 2rem;">REVIEW PRODUK</h2>
-            <p class="text-center mb-4" style="font-size: 1rem; color: #37393b;">Testimoni Dari Pelanggan Kami</p>
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                {{-- Review 1 --}}
-                <div class="col">
-                    <div class="card h-100 shadow-sm" style="border-radius: 12px;">
-                        <div class="card-body text-center">
-                            <p class="fw-bold mb-1" style="font-size: 1.1rem;">Miranda Rachel</p>
-                            <p class="text-muted mb-3" style="font-size: 0.9rem;">Jombang, Jawa Timur</p>
-                            <p class="mb-3" style="font-size: 0.95rem;">"Produk ini sangat bagus dan berkualitas. Saya sangat puas dengan pembeliannya."</p>
-                            <div>
-                                <span style="color: #FFD700;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-                                <span class="text-muted" style="font-size: 0.9rem;">(4.0)</span>
-                            </div>
+<div class="mt-5">
+    <hr>
+    <div class="container py-5" style="background-color: #c6e7ff; border-radius: 16px; max-width: 1100px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <h2 class="text-center fw-bold mb-2" style="font-size: 2rem;">REVIEW PRODUK</h2>
+        <p class="text-center mb-4" style="font-size: 1rem; color: #37393b;">Testimoni Dari Pelanggan Kami</p>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {{-- Review 1 --}}
+            <div class="col">
+                <div class="card h-100 shadow-sm" style="border-radius: 12px;">
+                    <div class="card-body text-center">
+                        <p class="fw-bold mb-1" style="font-size: 1.1rem;">Miranda Rachel</p>
+                        <p class="text-muted mb-3" style="font-size: 0.9rem;">Jombang, Jawa Timur</p>
+                        <p class="mb-3" style="font-size: 0.95rem;">"Produk ini sangat bagus dan berkualitas. Saya sangat puas dengan pembeliannya."</p>
+                        <div>
+                            <span style="color: #FFD700;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                            <span class="text-muted" style="font-size: 0.9rem;">(4.0)</span>
                         </div>
                     </div>
                 </div>
-                {{-- Repeat for other reviews --}}
+            </div>
+
+            {{-- Review 2 --}}
+            <div class="col">
+                <div class="card h-100 shadow-sm" style="border-radius: 12px;">
+                    <div class="card-body text-center">
+                        <p class="fw-bold mb-1" style="font-size: 1.1rem;">Budi Santoso</p>
+                        <p class="text-muted mb-3" style="font-size: 0.9rem;">Jakarta Selatan</p>
+                        <p class="mb-3" style="font-size: 0.95rem;">"Pengiriman cepat dan packing rapi. Recommended seller!"</p>
+                        <div>
+                            <span style="color: #FFD700;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                            <span class="text-muted" style="font-size: 0.9rem;">(5.0)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Review 3 --}}
+            <div class="col">
+                <div class="card h-100 shadow-sm" style="border-radius: 12px;">
+                    <div class="card-body text-center">
+                        <p class="fw-bold mb-1" style="font-size: 1.1rem;">Citra Lestari</p>
+                        <p class="text-muted mb-3" style="font-size: 0.9rem;">Bandung, Jawa Barat</p>
+                        <p class="mb-3" style="font-size: 0.95rem;">"Kualitasnya lumayan sesuai harga, tapi warnanya sedikit beda dari gambar."</p>
+                        <div>
+                            <span style="color: #FFD700;">&#9733;&#9733;&#9733;</span><span style="color: #e0e0e0;">&#9734;&#9734;</span>
+                            <span class="text-muted" style="font-size: 0.9rem;">(3.0)</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</div>
+
 
 @endsection

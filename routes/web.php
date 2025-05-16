@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\ContactController; // Tambahkan import untuk ContactController
+use App\Http\Controllers\ReviewController;
 
 Route::get('/', function () {
     $products = \App\Models\Produk::all(); // Fetch all products
@@ -36,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/reviews', [\App\Http\Controllers\ReviewController::class, 'store'])->name('reviews.store');
     Route::get('/kontak',[HomeController::class, 'kontak'])->name('kontak');
     Route::post('/kontak/kirim', [HomeController::class, 'storeKontak'])->name('kontak.store');
+    Route::get('/review{id}',[ReviewController::class, 'show'])->name('review.show');
 });
 
  // Show product detail
