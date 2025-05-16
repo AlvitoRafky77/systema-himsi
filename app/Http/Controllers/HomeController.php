@@ -13,7 +13,11 @@ class HomeController extends Controller
     public function index()
     {
         $products = Produk::all(); // Fetch all products from the database
-        return view('dashboard', compact('products'));
+        $latest_reviews = \App\Models\Review::with('user', 'product') // Eager load user and product
+            ->latest() // Order by latest
+            ->take(3) // Limit to 3 latest reviews
+            ->get(); // Fetch the reviews
+        return view('dashboard', compact('products', 'latest_reviews')); // Pass products and latest reviews to the view
     }
 
     public function about()

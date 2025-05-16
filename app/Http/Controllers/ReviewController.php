@@ -2,33 +2,50 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produk; // Model Produk Anda
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
-
     public function index()
     {
-        $review = Review::latest()->first(); // Ambil review terbaru
-        return view('layouts.frontend', compact('review'));
+        // Ambil semua review, urutkan dari terbaru, dengan paginasi, dan eager load relasi
+        $reviews = Review::with('user', 'product') // Eager load user dan produk
+                         ->latest()                // Urutkan dari terbaru
+                         ->paginate(9);           // Paginasi (misal 9 review per halaman)
+
+        return view('review.index', compact('reviews')); // Kirim data $reviews ke view
     }
+
+    public function create() // Hapus parameter Produk $product
+    {
+        // Ambil semua produk untuk ditampilkan di dropdown
+        // Urutkan berdasarkan nama agar mudah dicari
+        $products = Produk::orderBy('name')->get();
+
+        // Kirim daftar produk ke view
+        return view('review.create', compact('products'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([
-            'product_id' => 'required|exists:produk,id',
+            'product_id' => 'required|exists:produks,id', // PERBAIKI: 'products', bukan 'produk'
             'review' => 'required|string|max:1000',
             'rating' => 'required|integer|min:1|max:5',
         ]);
 
         Review::create([
             'user_id' => auth()->id(),
-            'product_id' => $request->product_id,
+            'product_id' => $request->product_id, // Ini diambil dari hidden input di form
             'review' => $request->review,
             'rating' => $request->rating,
         ]);
 
-        return redirect()->back()->with('success', 'Review berhasil dikirim.');
+
+        return redirect()->back()->with('success', 'Review Anda berhasil dikirim!');
     }
 
     public function review()
@@ -37,10 +54,10 @@ class ReviewController extends Controller
         return view('review.show', compact('reviews')); // Kirim data review ke view
     }
 
-    public function show($id)
+    public function show(Review $review) // Terima objek Review
     {
-        $review = Review::findOrFail($id); // Ambil review berdasarkan ID atau tampilkan 404 jika tidak ditemukan
-
-        return view('review.show', compact('review')); // Kirim data review ke view
+        // Eager load relasi jika belum (meskipun $review sudah objeknya)
+        $review->load('user', 'product');
+        return view('review.show', compact('review'));
     }
 }

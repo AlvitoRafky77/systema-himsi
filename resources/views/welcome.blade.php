@@ -71,59 +71,52 @@
     </div>
 
     {{-- REVIEW PRODUK SECTION --}}
-<div class="mt-5">
-    <hr>
-    <div class="container py-5" style="background-color: #c6e7ff; border-radius: 16px; max-width: 1100px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-        <h2 class="text-center fw-bold mb-2" style="font-size: 2rem;">REVIEW PRODUK</h2>
-        <p class="text-center mb-4" style="font-size: 1rem; color: #37393b;">Testimoni Dari Pelanggan Kami</p>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            {{-- Review 1 --}}
-            <div class="col">
-                <div class="card h-100 shadow-sm" style="border-radius: 12px;">
-                    <div class="card-body text-center">
-                        <p class="fw-bold mb-1" style="font-size: 1.1rem;">Miranda Rachel</p>
-                        <p class="text-muted mb-3" style="font-size: 0.9rem;">Jombang, Jawa Timur</p>
-                        <p class="mb-3" style="font-size: 0.95rem;">"Produk ini sangat bagus dan berkualitas. Saya sangat puas dengan pembeliannya."</p>
-                        <div>
-                            <span style="color: #FFD700;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-                            <span class="text-muted" style="font-size: 0.9rem;">(4.0)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="mt-5">
+        <hr>
+        <div class="container py-5" style="background-color: #c6e7ff; border-radius: 16px; max-width: 1100px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            <h2 class="text-center fw-bold mb-2" style="font-size: 2rem;">REVIEW PRODUK</h2>
+            <p class="text-center mb-4" style="font-size: 1rem; color: #37393b;">Testimoni Dari Pelanggan Kami</p>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
 
-            {{-- Review 2 --}}
-            <div class="col">
-                <div class="card h-100 shadow-sm" style="border-radius: 12px;">
-                    <div class="card-body text-center">
-                        <p class="fw-bold mb-1" style="font-size: 1.1rem;">Budi Santoso</p>
-                        <p class="text-muted mb-3" style="font-size: 0.9rem;">Jakarta Selatan</p>
-                        <p class="mb-3" style="font-size: 0.95rem;">"Pengiriman cepat dan packing rapi. Recommended seller!"</p>
-                        <div>
-                            <span style="color: #FFD700;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                            <span class="text-muted" style="font-size: 0.9rem;">(5.0)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                {{-- Loop melalui data $latest_reviews yang dikirim dari controller/route --}}
+                @forelse ($latest_reviews as $review_item)
+                <div class="col">
+                    <div class="card h-100 shadow-sm" style="border-radius: 12px;">
+                        <div class="card-body text-center d-flex flex-column">
+                            <p class="fw-bold mb-1" style="font-size: 1.1rem;">
+                                {{ $review_item->user->name ?? 'Pengguna' }} - {{ $review_item->product->name ?? 'Produk Tidak Diketahui' }}
+                            </p>
 
-            {{-- Review 3 --}}
-            <div class="col">
-                <div class="card h-100 shadow-sm" style="border-radius: 12px;">
-                    <div class="card-body text-center">
-                        <p class="fw-bold mb-1" style="font-size: 1.1rem;">Citra Lestari</p>
-                        <p class="text-muted mb-3" style="font-size: 0.9rem;">Bandung, Jawa Barat</p>
-                        <p class="mb-3" style="font-size: 0.95rem;">"Kualitasnya lumayan sesuai harga, tapi warnanya sedikit beda dari gambar."</p>
-                        <div>
-                            <span style="color: #FFD700;">&#9733;&#9733;&#9733;</span><span style="color: #e0e0e0;">&#9734;&#9734;</span>
-                            <span class="text-muted" style="font-size: 0.9rem;">(3.0)</span>
+                            <p class="mb-3" style="font-size: 0.95rem; flex-grow: 1;">
+                                "{{ \Illuminate\Support\Str::limit($review_item->review, 120) }}"
+                            </p>
+
+                            <div class="mt-auto">
+                                @if ($review_item->rating)
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= $review_item->rating)
+                                            <span style="color: #FFD700;">&#9733;</span>{{-- Bintang Terisi --}}
+                                        @else
+                                            <span style="color: #e0e0e0;">&#9733;</span>{{-- Bintang Kosong --}}
+                                        @endif
+                                    @endfor
+                                    <span class="text-muted" style="font-size: 0.9rem;">({{ number_format($review_item->rating, 1) }})</span>
+                                @else
+                                    <span class="text-muted" style="font-size: 0.9rem;">Belum ada rating</span>
+                                @endif
+                            </div>
+                            {{-- Opsional: Tampilkan nama produk yang direview --}}
+                            {{-- <p class="text-muted small mt-2">Produk: {{ $review_item->product->name ?? '-' }}</p> --}}
                         </div>
                     </div>
                 </div>
+                @empty
+                <div class="col-12">
+                    <p class="text-center text-muted fst-italic">Belum ada review untuk ditampilkan.</p>
+                </div>
+                @endforelse
+
             </div>
         </div>
     </div>
-</div>
-
-
 @endsection
