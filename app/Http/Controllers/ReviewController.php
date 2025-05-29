@@ -38,7 +38,7 @@ class ReviewController extends Controller
         ]);
 
         Review::create([
-            'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
             'product_id' => $request->product_id, // Ini diambil dari hidden input di form
             'review' => $request->review,
             'rating' => $request->rating,

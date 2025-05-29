@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Bulan Mei 2025 pada 19.17
+-- Waktu pembuatan: 16 Bulan Mei 2025 pada 20.18
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -99,6 +99,22 @@ CREATE TABLE `job_batches` (
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `kontaks`
+--
+
+CREATE TABLE `kontaks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `no_hp` varchar(255) DEFAULT NULL,
+  `pesan` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `migrations`
 --
 
@@ -118,7 +134,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '0001_01_01_000002_create_jobs_table', 1),
 (4, '2025_04_20_081452_add_is_admin_to_users_table', 2),
 (6, '2025_04_20_180537_merchandise', 4),
-(9, '2025_04_20_182533_create_produk_table', 5);
+(9, '2025_04_20_182533_create_produk_table', 5),
+(10, '2025_05_03_154520_create_kontaks_table', 6);
 
 -- --------------------------------------------------------
 
@@ -165,6 +182,33 @@ INSERT INTO `produks` (`id`, `name`, `type`, `price`, `image`, `stock`, `descrip
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `review` text NOT NULL,
+  `rating` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `reviews`
+--
+
+INSERT INTO `reviews` (`id`, `user_id`, `product_id`, `review`, `rating`, `created_at`, `updated_at`) VALUES
+(2, 7, 4, 'Enak sekali mengeyangkan', 5, '2025-05-16 10:21:25', '2025-05-16 10:21:25'),
+(3, 7, 2, 'Keychain ini sangat keren', 4, '2025-05-16 10:22:13', '2025-05-16 10:22:13'),
+(4, 7, 11, 'Kurang bagus', 2, '2025-05-16 10:29:51', '2025-05-16 10:29:51'),
+(5, 7, 5, 'Manis sekali tapi enak', 3, '2025-05-16 10:31:35', '2025-05-16 10:31:35'),
+(6, 8, 1, 'Lanyard ini sangat bagus sekali dari segi warna dan desain', 5, '2025-05-16 10:56:54', '2025-05-16 10:56:54');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `sessions`
 --
 
@@ -182,7 +226,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('Urn4wvRCqizJ1fb0myqMhFTA7RXCwvbfc9ykTvKl', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRlVudm42RXpSNmNWcEZKc1BKa0hHcGczclBlZFFTRzh1a3BoSXFJVyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fX0=', 1746180253);
+('hY58HFF3slS2OcniWWMZoyhzJXedHFW24pou6lI9', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVTY1R3d1NjR6VDdBSjZMZFE4Q0xRQ0tsUE1ZalNxMm95VUw4STNZTSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fX0=', 1747419498);
 
 -- --------------------------------------------------------
 
@@ -212,7 +256,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 (4, 'Admin', 'admin@gmail.com', NULL, '$2y$12$8M8V5i3HMHzrvRCfOgxPjOQzGWNxVP.21K6Clj8b2EAuhZLgy4SCO', NULL, 1, '2025-04-20 01:12:35', '2025-04-20 01:12:35'),
 (5, 'Fadel Jomok', 'fadeljomokerto@gmail.com', NULL, '$2y$12$NzftOA.bDvnI.7fly5bGKeP4TDlF4.Bh4lusvMRopj3s82qMIns0.', NULL, 0, '2025-04-20 16:42:46', '2025-04-20 16:42:46'),
 (6, 'Fadel Adzandika', 'fadel123@gmail.com', NULL, '$2y$12$jtEsMSYsx/n5hTQQzhzF.Ol45DtOA7oCaplUXt79pIFQnVhVVA9hi', NULL, 0, '2025-04-30 02:51:03', '2025-04-30 02:51:03'),
-(7, 'Rendy Bau', 'rendy@gmail.com', NULL, '$2y$12$BWshwK/V1HIuOmu/O.TtzOLNUSv7JxhWgx7ZvHX/SxXowfoXaWj4i', NULL, 0, '2025-05-02 00:55:42', '2025-05-02 00:55:42');
+(7, 'Rendy Bau', 'rendy@gmail.com', NULL, '$2y$12$BWshwK/V1HIuOmu/O.TtzOLNUSv7JxhWgx7ZvHX/SxXowfoXaWj4i', NULL, 0, '2025-05-02 00:55:42', '2025-05-02 00:55:42'),
+(8, 'Aulia Fauziah', 'aulia@gmail.com', NULL, '$2y$12$Qm4Wb/dcr6e/uRjlm0dQvOPWDVQql7DuumRUoVSFCYcfE9KHO5siS', NULL, 0, '2025-05-16 10:40:20', '2025-05-16 11:18:12');
 
 --
 -- Indexes for dumped tables
@@ -251,6 +296,12 @@ ALTER TABLE `job_batches`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `kontaks`
+--
+ALTER TABLE `kontaks`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
@@ -267,6 +318,13 @@ ALTER TABLE `password_reset_tokens`
 --
 ALTER TABLE `produks`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `reviews_user_id_foreign` (`user_id`);
 
 --
 -- Indeks untuk tabel `sessions`
@@ -300,10 +358,16 @@ ALTER TABLE `jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT untuk tabel `kontaks`
+--
+ALTER TABLE `kontaks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `produks`
@@ -312,10 +376,26 @@ ALTER TABLE `produks`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT untuk tabel `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `reviews`
+--
+ALTER TABLE `reviews`
+  ADD CONSTRAINT `reviews_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
