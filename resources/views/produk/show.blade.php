@@ -2,6 +2,8 @@
 
 @section('title', $produk->name)
 
+//Tampilan untuk rincian detail produk
+
 @section('content')
 <div class="container py-5">
     <div class="row">
@@ -59,7 +61,7 @@
                 @endforeach
             @else
                 <div class="alert alert-info">
-                    Belum ada review untuk produk ini.
+
                 </div>
             @endif
         </div>
