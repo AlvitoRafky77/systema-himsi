@@ -11,6 +11,7 @@ class SearchController extends Controller
     {
         $query = $request->input('query');
 
+  //Pencarian Produk
         $products = Produk::where('name', 'like', "%{$query}%")
             ->orWhere('description', 'like', "%{$query}%")
             ->paginate(9);
