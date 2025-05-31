@@ -84,7 +84,7 @@
                     <div class="card h-100 shadow-sm" style="border-radius: 12px;">
                         <div class="card-body text-center d-flex flex-column">
                             <p class="fw-bold mb-1" style="font-size: 1.1rem;">
-                                {{ $review_item->user->name ?? 'Pengguna' }} - {{ $review_item->product->name ?? 'Produk Tidak Diketahui' }} 
+                                {{ $review_item->user->name ?? 'Pengguna' }} - {{ $review_item->produk->name ?? 'Produk Tidak Diketahui' }}
                             </p>
                             {{-- <p class="text-muted mb-3" style="font-size: 0.9rem;">Lokasi Pengguna</p> --}}
 

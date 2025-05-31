@@ -16,7 +16,7 @@ use App\Http\Controllers\CheckoutController;
 
 Route::get('/', function () {
     $products = \App\Models\Produk::all(); // Fetch all products
-    $latest_reviews = Review::with('user', 'product') // Eager load data user & produk terkait
+    $latest_reviews = Review::with('user', 'produk') // Eager load data user & produk terkait
                              ->latest()                 // Urutkan dari yang terbaru
                              ->take(3)                  // Ambil 3 review saja (atau jumlah lain)
                              ->get();
@@ -34,7 +34,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); // Pr
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         $products = \App\Models\Produk::all(); // Fetch all products
-        $latest_reviews = Review::with('user', 'product')
+        $latest_reviews = Review::with('user', 'produk')
                                  ->latest()
                                  ->take(3)
                                  ->get();

@@ -19,10 +19,6 @@
     @endauth
     {{-- ======================================= --}}
 
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
     <div class="row">
         @forelse($reviews as $review_item)
         <div class="col-md-4 mb-4">
