@@ -10,6 +10,7 @@ use App\Http\Controllers\ReviewController;
 use App\Models\Produk;
 use App\Models\Review;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\Admin\ProductController;
 
 Route::get('/', function () {
     $products = \App\Models\Produk::all(); // Fetch all products
@@ -73,7 +74,7 @@ Route::middleware(['auth', 'is_admin'])
             return view('admin.dashboard'); // Render the admin dashboard view
         })->name('dashboard');
 
-        Route::resource('products', ProdukController::class); // Resource route for managing products
+        Route::resource('products', ProductController::class); // Resource route for managing products
 
         // Route untuk menampilkan daftar pesan kontak
         Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
