@@ -2,6 +2,8 @@
 
 @section('title', 'Hasil Pencarian')
 
+
+
 @section('content')
 <div class="container py-5">
     <div class="row">
@@ -11,7 +13,7 @@
             @if($products->isEmpty())
                 <div class="alert alert-info">
                     <h4 class="alert-heading">Tidak ditemukan produk yang sesuai!</h4>
-                    <p>Silakan coba dengan kata kunci lain atau kunjungi kategori produk kami:</p>
+                    <p>Silakan coba lagi dengan kata kunci lain atau kunjungi kategori produk kami:</p>
                     <hr>
                     <div class="d-flex gap-2">
                         <a href="{{ route('produk.makanan') }}" class="btn btn-outline-primary">Makanan</a>
