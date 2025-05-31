@@ -57,6 +57,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/kontak',[HomeController::class, 'kontak'])->name('kontak');
     Route::post('/kontak/kirim', [HomeController::class, 'storeKontak'])->name('kontak.store');
+    // Search Route untuk mencari produk
+    Route::get('/search', [SearchController::class, 'index'])->name('search');
 
 });
 
@@ -75,5 +77,4 @@ Route::middleware(['auth', 'is_admin'])
         Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
     });
 
-// Search Route untuk mencari produk
-Route::get('/search', [SearchController::class, 'index'])->name('search');
+
