@@ -39,6 +39,16 @@
                         <li class="nav-item"> <a class="nav-link" href="{{ route('review.index') }}">Review</a> </li>
                         <li class="nav-item"> <a class="nav-link" href="{{route('kontak')}}">Kontak</a> </li>
 
+                        {{-- Search Form --}}
+                        <li class="nav-item">
+                            <form action="{{ route('search') }}" method="GET" class="d-flex">
+                                <input class="form-control me-2" type="search" name="query" placeholder="Cari produk..." aria-label="Search" style="width: 200px;">
+                                <button class="btn btn-outline-light" type="submit">
+                                    <i class="fas fa-search"></i> Cari
+                                </button>
+                            </form>
+                        </li>
+
                         @guest
                             <li class="nav-item">
                                 {{-- Link login sederhana, warna diatur navbar-dark --}}

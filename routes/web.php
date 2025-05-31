@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ContactController; // Tambahkan import untuk Cont
 use App\Http\Controllers\ReviewController;
 use App\Models\Produk;
 use App\Models\Review;
+use App\Http\Controllers\SearchController;
 
 Route::get('/', function () {
     $products = \App\Models\Produk::all(); // Fetch all products
@@ -41,6 +42,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('edit');
     Route::get('/profile/update', [ProfileController::class, 'update'])->name('update');
 
+
+
+
     Route::get('/produk/merchandise', [ProdukController::class, 'merchandise'])->name('produk.merchandise');
     Route::get('/produk/makanan', [ProdukController::class, 'makanan'])->name('produk.makanan');
     Route::get('/produk/minuman', [ProdukController::class, 'minuman'])->name('produk.minuman');
@@ -65,8 +69,11 @@ Route::middleware(['auth', 'is_admin'])
             return view('admin.dashboard'); // Render the admin dashboard view
         })->name('dashboard');
 
-        Route::resource('products', ProductController::class); // Resource route for managing products
+        Route::resource('products', ProdukController::class); // Resource route for managing products
 
         // Route untuk menampilkan daftar pesan kontak
         Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
     });
+
+// Search Route
+Route::get('/search', [SearchController::class, 'index'])->name('search');
