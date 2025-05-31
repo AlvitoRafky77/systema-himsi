@@ -75,5 +75,5 @@ Route::middleware(['auth', 'is_admin'])
         Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
     });
 
-// Search Route
+// Search Route untuk mencari produk
 Route::get('/search', [SearchController::class, 'index'])->name('search');
