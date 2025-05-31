@@ -35,7 +35,7 @@ class ProdukController extends Controller
 
     public function show(Produk $produk)
     {
-        // Load the reviews relationship with the user
+        // Memuat hubungan ulasan dengan pengguna
         $produk->load('reviews.user');
         return view('produk.show', compact('produk'));
     }
