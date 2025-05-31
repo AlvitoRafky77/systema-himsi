@@ -32,4 +32,11 @@ class ProdukController extends Controller
         $produk = Produk::where('type', 'drink')->paginate(6); // Paginate 6 items per page
         return view('produk.minuman', compact('produk'));
     }
+
+    public function show(Produk $produk)
+    {
+        // Load the reviews relationship with the user
+        $produk->load('reviews.user');
+        return view('produk.show', compact('produk'));
+    }
 }
