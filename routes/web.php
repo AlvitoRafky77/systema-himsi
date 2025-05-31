@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/produk/makanan', [ProdukController::class, 'makanan'])->name('produk.makanan');
     Route::get('/produk/minuman', [ProdukController::class, 'minuman'])->name('produk.minuman');
     Route::get('/produk/detail', [ProdukController::class, 'showDetail'])->name('produk.detail');
-    // Add route for showing product details
+    // Add route untuk menampilakan detail produk
     Route::get('/produk/{produk}', [ProdukController::class, 'show'])->name('produk.show');
 
     Route::get('/reviews', [ReviewController::class, 'index'])->name('review.index');
