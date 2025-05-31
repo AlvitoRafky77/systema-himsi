@@ -7,9 +7,40 @@
 
     <title>@yield('title', 'Systema HIMSI')</title>
 
+    {{-- Font Awesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+
+    <style>
+        .navbar .nav-item {
+            margin: 0 8px;
+        }
+        .navbar .nav-link {
+            padding: 8px 12px !important;
+        }
+        .navbar .dropdown-menu {
+            margin-top: 8px;
+        }
+        .navbar-nav .search-form {
+            margin-left: 15px;
+        }
+        .cart-icon {
+            font-size: 1.2rem;
+            margin-right: 5px;
+        }
+        .navbar .btn-outline-light {
+            padding: 6px 12px;
+        }
+        .navbar-brand {
+            margin-right: 30px;
+        }
+        .search-container {
+            margin: 0 15px;
+        }
+    </style>
 
 </head>
 <body>
@@ -25,7 +56,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto align-items-center">
                         <li class="nav-item"> <a class="nav-link" href="{{ url('/') }}">Home</a> </li>
                         <li class="nav-item"> <a class="nav-link" href="{{route('about')}}">Tentang Kami</a> </li>
                         <li class="nav-item dropdown">
@@ -39,9 +70,19 @@
                         <li class="nav-item"> <a class="nav-link" href="{{ route('review.index') }}">Review</a> </li>
                         <li class="nav-item"> <a class="nav-link" href="{{route('kontak')}}">Kontak</a> </li>
 
-                        {{-- Search Form --}}
+                        {{-- Keranjang Belanja --}}
                         <li class="nav-item">
-                            <form action="{{ route('search') }}" method="GET" class="d-flex">
+                            <a class="nav-link position-relative" href="{{ route('cart.index') }}">
+                                <i class="fas fa-shopping-cart cart-icon"></i>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
+                                    {{ Auth::check() ? App\Models\Cart::where('user_id', Auth::id())->sum('quantity') : '0' }}
+                                </span>
+                            </a>
+                        </li>
+
+                        {{-- Search Form --}}
+                        <li class="nav-item search-container">
+                            <form action="{{ route('search') }}" method="GET" class="d-flex search-form">
                                 <input class="form-control me-2" type="search" name="query" placeholder="Cari produk..." aria-label="Search" style="width: 200px;">
                                 <button class="btn btn-outline-light" type="submit">
                                     <i class="fas fa-search"></i> Cari
@@ -156,6 +197,37 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: "{{ session('success') }}",
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: true,
+            toast: true,
+            position: 'top-end'
+        });
+    </script>
+    @endif
+
+    @if(session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "{{ session('error') }}",
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: true,
+            toast: true,
+            position: 'top-end'
+        });
+    </script>
+    @endif
 </body>
 </html>
 

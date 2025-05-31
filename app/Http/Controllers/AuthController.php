@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -15,16 +16,26 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
+        $credentials = $request->validate([
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'required'
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect()->intended('dashboard'); // Redirect to dashboard on success
+        // Cek apakah email terdaftar
+        $user = User::where('email', $credentials['email'])->first();
+
+        if (!$user) {
+            return back()->with('error', 'Email tidak terdaftar! Silakan daftar terlebih dahulu.');
         }
 
-        return back()->withErrors(['email' => 'Invalid credentials.']);
+        // Coba login
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('dashboard')->with('success', 'Selamat datang kembali, ' . Auth::user()->name . '!');
+        }
+
+        // Jika sampai di sini, berarti password salah
+        return back()->with('error', 'Password yang Anda masukkan salah!');
     }
 
     public function showRegistrationForm()
@@ -36,17 +47,19 @@ class AuthController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8|confirmed',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('login')->with('success', 'Registration Berhasil. Silahkan Login.');
+        Auth::login($user);
+
+        return redirect()->route('dashboard')->with('success', 'Selamat datang di Systema HIMSI, ' . $user->name . '!');
     }
 
     public function logout(Request $request)
@@ -54,7 +67,6 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
-        return redirect()->route('login');
+        return redirect('/')->with('success', 'Anda telah berhasil logout.');
     }
 }

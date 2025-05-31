@@ -15,7 +15,13 @@
                         <p class="card-text"><strong>Rp {{ number_format($item->price, 0, ',', '.') }}</strong></p>
                         <p class="card-text">{{ $item->description }}</p>
                         <p class="card-text">Stok: {{ $item->stock }}</p>
-                        <a href="#" class="btn btn-sm btn-outline-primary">Tambahkan</a>
+                        <form action="{{ route('cart.add', $item) }}" method="POST" class="d-flex gap-2">
+                            @csrf
+                            <input type="number" name="quantity" value="1" min="1" max="{{ $item->stock }}" class="form-control form-control-sm" style="width: 70px;">
+                            <button type="submit" class="btn btn-warning btn-sm">
+                                <i class="fas fa-cart-plus"></i> Tambah
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

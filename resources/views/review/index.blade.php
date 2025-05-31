@@ -28,9 +28,9 @@
         <div class="col-md-4 mb-4">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $review_item->product->name ?? 'Produk Tidak Diketahui' }}</h5>
-                    @if ($review_item->product && $review_item->product->image)
-                        <img src="{{ asset('storage/' . $review_item->product->image) }}" class="card-img-top img-fluid" style="object-fit: cover; height: 200px;" alt="{{ $review_item->product->name }}">
+                    <h5 class="card-title">{{ $review_item->produk->name ?? 'Produk Tidak Diketahui' }}</h5>
+                    @if ($review_item->produk && $review_item->produk->image)
+                        <img src="{{ asset('storage/' . $review_item->produk->image) }}" class="card-img-top img-fluid" style="object-fit: cover; height: 200px;" alt="{{ $review_item->produk->name }}">
                     @else
                         <img src="{{ asset('images/default-product.png') }}" class="card-img-top img-fluid" style="object-fit: cover; height: 200px;" alt="Default Image">
                     @endif

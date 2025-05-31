@@ -2,7 +2,15 @@
 
 @section('content')
 <div class="container">
+    <div class="mb-4">
+        <a href="{{ route('dashboard') }}" class="btn btn-primary">
+            <i class="fas fa-home me-2"></i>
+            Kembali ke Beranda
+        </a>
+    </div>
+
     <h1 class="my-4 text-center">Detail Produk</h1>
+
     <div class="row justify-content-center">
         @foreach($products as $product)
         <div class="col-md-4 mb-4">
@@ -15,7 +23,27 @@
                     <p class="card-text">{{ $product->description }}</p>
                     <p class="card-text mt-auto"><strong>Harga:</strong> Rp {{ number_format($product->price, 0, ',', '.') }}</p>
                     <p class="card-text"><strong>Stok:</strong> {{ $product->stock }}</p>
-                    <a href="#" class="btn btn-primary mt-2">Beli Produk</a>
+
+                    @if($product->stock > 0)
+                        <form action="{{ route('cart.add', $product->id) }}" method="POST" class="mt-2 d-flex align-items-center">
+                            @csrf
+                            <input type="number"
+                                   name="quantity"
+                                   class="form-control me-2"
+                                   value="1"
+                                   min="1"
+                                   max="{{ $product->stock }}"
+                                   style="width: 70px;"
+                                   required>
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas fa-shopping-cart"></i> Tambah
+                            </button>
+                        </form>
+                    @else
+                        <div class="alert alert-warning mt-2 mb-0">
+                            Stok habis
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

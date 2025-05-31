@@ -11,6 +11,8 @@ use App\Models\Produk;
 use App\Models\Review;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 Route::get('/', function () {
     $products = \App\Models\Produk::all(); // Fetch all products
@@ -44,8 +46,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/update', [ProfileController::class, 'update'])->name('update');
 
 
-
-
     Route::get('/produk/merchandise', [ProdukController::class, 'merchandise'])->name('produk.merchandise');
     Route::get('/produk/makanan', [ProdukController::class, 'makanan'])->name('produk.makanan');
     Route::get('/produk/minuman', [ProdukController::class, 'minuman'])->name('produk.minuman');
@@ -62,6 +62,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/kontak/kirim', [HomeController::class, 'storeKontak'])->name('kontak.store');
     // Search Route untuk mencari produk
     Route::get('/search', [SearchController::class, 'index'])->name('search');
+
+    // Cart Routes
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/{produk}', [CartController::class, 'add'])->name('cart.add');
+    Route::put('/cart/{cart}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/{cart}', [CartController::class, 'remove'])->name('cart.remove');
+
+    // Checkout Routes
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+    Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
+    Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
 
 });
 

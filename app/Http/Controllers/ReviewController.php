@@ -12,7 +12,7 @@ class ReviewController extends Controller
     public function index()
     {
         // Ambil semua review, urutkan dari terbaru, dengan paginasi, dan eager load relasi
-        $reviews = Review::with('user', 'product') // Eager load user dan produk
+        $reviews = Review::with('user', 'produk') // Eager load user dan produk
                          ->latest()                // Urutkan dari terbaru
                          ->paginate(9);           // Paginasi (misal 9 review per halaman)
 
@@ -32,20 +32,19 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'product_id' => 'required|exists:produks,id', // PERBAIKI: 'products', bukan 'produk'
+            'product_id' => 'required|exists:produk,id',
             'review' => 'required|string|max:1000',
             'rating' => 'required|integer|min:1|max:5',
         ]);
 
         Review::create([
             'user_id' => Auth::id(),
-            'product_id' => $request->product_id, // Ini diambil dari hidden input di form
+            'product_id' => $request->product_id,
             'review' => $request->review,
             'rating' => $request->rating,
         ]);
 
-
-        return redirect()->back()->with('success', 'Review Anda berhasil dikirim!');
+        return redirect()->route('review.index')->with('success', 'Review Anda berhasil dikirim!');
     }
 
     public function review()
@@ -57,7 +56,7 @@ class ReviewController extends Controller
     public function show(Review $review) // Terima objek Review
     {
         // Eager load relasi jika belum (meskipun $review sudah objeknya)
-        $review->load('user', 'product');
+        $review->load('user', 'produk');
         return view('review.show', compact('review'));
     }
 }

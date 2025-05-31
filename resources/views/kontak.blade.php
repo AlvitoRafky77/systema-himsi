@@ -6,12 +6,6 @@
 <div class="container my-5" style="font-family: 'Montserrat', sans-serif; font-weight: 400; letter-spacing: 0.01em;">
     <h1>Kontak Kami</h1>
 
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-
     <div class="row">
         <div class="col-md-6">
             <div class="card shadow-sm">
