@@ -9,7 +9,7 @@
             <h2 class="card-title fw-bold mb-4">Detail Review</h2>
             @if (isset($review) && $review) {{-- Pastikan $review ada --}}
                 <h5 class="card-subtitle mb-2 text-muted">Review oleh: {{ $review->user->name ?? 'Pengguna' }}</h5>
-                <p class="card-text">Produk: {{ $review->product->name ?? 'Produk Tidak Diketahui' }}</p>
+                <p class="card-text">Produk: {{ $review->produk->name ?? 'Produk Tidak Diketahui' }}</p>
                 <p class="card-text">
                     Rating: {{ $review->rating }}/5
                     <span class="ms-2">
