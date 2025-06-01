@@ -10,7 +10,7 @@
     {{-- Font Awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
@@ -46,10 +46,10 @@
 <body>
     <div id="app">
         {{-- Menggunakan kelas Bootstrap untuk styling Navbar --}}
-        <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm"> {{-- bg-primary (biru) atau bg-dark (hitam) --}}
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
             <div class="container">
-                <a class="navbar-brand fw-bold" href="{{ url('/') }}"> {{-- fw-bold untuk tebal --}}
-                    <img src="{{ asset('images/HIMSI LOGO.png') }}" height="50" class="me-2 align-middle"> {{-- Sesuaikan tinggi & alignment logo --}}
+                <a class="navbar-brand fw-bold" href="{{ url('/') }}">
+                    <img src="{{ asset('images/HIMSI LOGO.png') }}" height="50" class="me-2 align-middle">
                     SYSTEMA HIMSI
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,7 +92,6 @@
 
                         @guest
                             <li class="nav-item">
-                                {{-- Link login sederhana, warna diatur navbar-dark --}}
                                 <a class="nav-link" href="{{ route('login') }}">Login</a>
                             </li>
                         @else
@@ -124,19 +123,26 @@
         </nav>
 
         <main class="py-4">
+            {{-- Hapus alert Bootstrap untuk pesan sukses dari sini --}}
+            {{-- @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif --}}
             @yield('content')
         </main>
 
         {{-- Menggunakan kelas Bootstrap untuk styling Footer --}}
-        <footer class="footer bg-blue text-white pt-5 pb-4 mt-5"> {{-- bg-dark atau warna custom dg kelas lain --}}
+        <footer class="footer bg-blue text-white pt-5 pb-4 mt-5">
             <div class="container text-md-left">
                 <div class="row text-md-left">
                     {{-- Kolom 1: Brand --}}
                     <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
-                        <h5 class="text-uppercase mb-4 fw-bold text-warning"> {{-- Judul pakai text-warning --}}
+                        <h5 class="text-uppercase mb-4 fw-bold text-warning">
                             <img src="{{ asset('images/HIMSI LOGO.png') }}" height="40" class="me-2"> Systema HIMSI
                         </h5>
-                        <p>  Platform resmi Himpunan Mahasiswa Sistem Informasi untuk memenuhi kebutuhan merchandise, makanan, dan minuman Anda.</p>
+                        <p> Platform resmi Himpunan Mahasiswa Sistem Informasi untuk memenuhi kebutuhan merchandise, makanan, dan minuman Anda.</p>
                         <p> Jl. Minangkabau Barat No.50, RT.1/RW.1, Ps. Manggis, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12970</p>
                     </div>
 
@@ -165,28 +171,28 @@
                     <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
                         <h5 class="text-uppercase mb-4 fw-bold text-warning">Hubungi Kami</h5>
                         <ul class="list-unstyled mb-0">
-                            <li class="mb-2 d-flex align-items-center"> {{-- Pakai flexbox untuk alignment ikon+teks --}}
+                            <li class="mb-2 d-flex align-items-center">
                                 <img src="{{ asset('images/Email.png') }}" alt="Email" height="20" class="me-2">
                                 <a href="mailto:himsitelu.jkt@gmail.com" class="text-white text-decoration-none">himsitelu.jkt@gmail.com</a>
                             </li>
-                             <li class="mb-2 d-flex align-items-center">
+                            <li class="mb-2 d-flex align-items-center">
                                 <img src="{{ asset('images/Instagram.png') }}" alt="Instagram" height="20" class="me-2">
                                 <a href="https://www.instagram.com/himsi_telujkt?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="text-white text-decoration-none">himsi_telujkt</a>
                             </li>
                             <li class="mb-2 d-flex align-items-center">
                                 <img src="{{ asset('images/Linkedin.jpg') }}" alt="LinkedIn" height="20" class="me-2">
                                 <a href="https://www.linkedin.com/company/himpunan-mahasiwa-sistem-informasi-jakarta/" target="_blank" class="text-white text-decoration-none">Himsi Tel-U Jakarta</a>
-                            </li>
+                            </li>
                         </ul>
                     </div>
                 </div>
 
-                <hr class="mb-4 mt-4 bg-secondary"> {{-- Garis pemisah --}}
+                <hr class="mb-4 mt-4 bg-secondary">
 
                 {{-- Copyright --}}
                 <div class="row align-items-center">
                     <div class="col-12">
-                        <p class="text-center text-white-50 small"> {{-- Teks copyright lebih kecil & redup --}}
+                        <p class="text-center text-white-50 small">
                             Copyright &copy; {{ date('Y') }}
                             <a href="{{ url('/') }}" class="text-white text-decoration-none"><strong>Systema HIMSI</strong></a>. All Rights Reserved.
                         </p>
@@ -196,38 +202,39 @@
         </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    @if(session('success'))
     <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Berhasil!',
-            text: "{{ session('success') }}",
-            showConfirmButton: false,
-            timer: 3500,
-            timerProgressBar: true,
-            toast: true,
-            position: 'top-end'
-        });
-    </script>
-    @endif
+        document.addEventListener('DOMContentLoaded', function() {
+            // SweetAlert untuk pesan sukses
+            @if(session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: "{{ session('success') }}",
+                    showConfirmButton: false,
+                    timer: 3500,
+                    timerProgressBar: true,
+                    toast: true,
+                    position: 'top-end'
+                });
+            @endif
 
-    @if(session('error'))
-    <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: "{{ session('error') }}",
-            showConfirmButton: false,
-            timer: 3500,
-            timerProgressBar: true,
-            toast: true,
-            position: 'top-end'
+            // SweetAlert untuk pesan error umum
+            @if(session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: "{{ session('error') }}",
+                    showConfirmButton: false,
+                    timer: 3500,
+                    timerProgressBar: true,
+                    toast: true,
+                    position: 'top-end'
+                });
+            @endif
         });
     </script>
-    @endif
 </body>
 </html>
-

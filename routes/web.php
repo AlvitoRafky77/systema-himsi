@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProdukController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Admin\ContactController; // Tambahkan import untuk ContactController
+use App\Http\Controllers\HomeController; // Pastikan ini diimpor
+use App\Http\Controllers\Admin\ContactController; // Tetap diimpor untuk index
 use App\Http\Controllers\ReviewController;
 use App\Models\Produk;
 use App\Models\Review;
@@ -17,8 +17,8 @@ use App\Http\Controllers\CheckoutController;
 Route::get('/', function () {
     $products = \App\Models\Produk::all(); // Fetch all products
     $latest_reviews = Review::with('user', 'produk') // Eager load data user & produk terkait
-                             ->latest()                 // Urutkan dari yang terbaru
-                             ->take(3)                  // Ambil 3 review saja (atau jumlah lain)
+                             ->latest()                // Urutkan dari yang terbaru
+                             ->take(3)                 // Ambil 3 review saja (atau jumlah lain)
                              ->get();
     return view('welcome', compact('products', 'latest_reviews')); // Pass products to the view
 })->name('home');
@@ -38,7 +38,6 @@ Route::middleware('auth')->group(function () {
                                  ->latest()
                                  ->take(3)
                                  ->get();
-        // ===> DAN TAMBAHKAN 'latest_reviews' KE compact() <===
         return view('dashboard', compact('products', 'latest_reviews'));
     })->name('dashboard'); // Show dashboard
     Route::get('/about',[HomeController::class, 'about'])->name('about'); // Show about page
@@ -76,7 +75,7 @@ Route::middleware('auth')->group(function () {
 
 });
 
- // Show product detail
+// Show product detail
 Route::middleware(['auth', 'is_admin'])
     ->prefix('admin') // URL prefix for admin routes
     ->name('admin.')  // Route name prefix
@@ -89,6 +88,6 @@ Route::middleware(['auth', 'is_admin'])
 
         // Route untuk menampilkan daftar pesan kontak
         Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
+        // Route untuk menghapus pesan kontak, sekarang di HomeController
+        Route::delete('/contacts/{contact}', [HomeController::class, 'destroy'])->name('contacts.destroy');
     });
-
-

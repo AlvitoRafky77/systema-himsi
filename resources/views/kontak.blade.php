@@ -6,6 +6,27 @@
 <div class="container my-5" style="font-family: 'Montserrat', sans-serif; font-weight: 400; letter-spacing: 0.01em;">
     <h1>Kontak Kami</h1>
 
+    {{-- Notifikasi Sukses Bootstrap telah dihapus dari sini. SweetAlert di layouts.frontend akan menanganinya. --}}
+    {{-- @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif --}}
+
+    {{-- Notifikasi Kesalahan Validasi Umum Bootstrap telah dihapus dari sini. SweetAlert di layouts.frontend akan menanganinya. --}}
+    {{-- @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading">Tolong lengkapi data Anda</h4>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif --}}
+
     <div class="row">
         <div class="col-md-6">
             <div class="card shadow-sm">
@@ -39,19 +60,19 @@
                         @csrf
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama</label>
-                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Anda" value="{{ old('nama', Auth::user()->name ?? '') }}" style="font-weight: 400;">
+                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Anda" value="{{ old('nama', Auth::user()->name ?? '') }}" style="font-weight: 400;" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Alamat Email Anda" value="{{ old('email', Auth::user()->email ?? '') }}" style="font-weight: 400;">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Alamat Email Anda" value="{{ old('email', Auth::user()->email ?? '') }}" style="font-weight: 400;" required>
                         </div>
                         <div class="mb-3">
                             <label for="no_hp" class="form-label">No. HP</label>
-                            <input type="text" class="form-control" id="no_hp" name="no_hp" placeholder="Nomor Telepon Anda" style="font-weight: 400;">
+                            <input type="text" class="form-control" id="no_hp" name="no_hp" placeholder="Nomor Telepon Anda" value="{{ old('no_hp') }}" style="font-weight: 400;">
                         </div>
                         <div class="mb-3">
                             <label for="pesan" class="form-label">Pesan</label>
-                            <textarea class="form-control" id="pesan" name="pesan" rows="4" placeholder="Pesan Anda" style="font-weight: 400;"></textarea>
+                            <textarea class="form-control" id="pesan" name="pesan" rows="4" placeholder="Pesan Anda" style="font-weight: 400;" required>{{ old('pesan') }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary" style="font-weight: 500;">Kirim Pesan</button>
                     </form>
