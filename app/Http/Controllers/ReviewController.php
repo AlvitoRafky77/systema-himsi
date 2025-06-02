@@ -14,7 +14,7 @@ class ReviewController extends Controller
         // Ambil semua review, urutkan dari terbaru, dengan paginasi, dan eager load relasi
         $reviews = Review::with('user', 'produk') // Eager load user dan produk
                          ->latest()                // Urutkan dari terbaru
-                         ->paginate(9);           // Paginasi (misal 9 review per halaman)
+                         ->paginate(20);           // Paginasi (misal 9 review per halaman)
 
         return view('review.index', compact('reviews')); // Kirim data $reviews ke view
     }
