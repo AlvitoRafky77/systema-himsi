@@ -56,6 +56,9 @@
                         </div>
                         <div class="product-info">
                             <h3 class="product-title">{{ $product->name }}</h3>
+                            <div class="category-badge">
+                                <i class="fas fa-tag me-2"></i>{{ $product->type }}
+                            </div>
                             <p class="product-description">{{ Str::limit($product->description, 100) }}</p>
                             <div class="product-price">
                                 <span>Rp {{ number_format($product->price, 0, ',', '.') }}</span>
@@ -302,6 +305,23 @@
         font-size: 1.2rem;
         font-weight: 600;
         color: #002fff;
+    }
+
+    .category-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 12px;
+        background: rgba(0, 114, 255, 0.08);
+        color: #0072FF;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin: 8px 0;
+    }
+
+    .category-badge i {
+        font-size: 0.8rem;
+        opacity: 0.8;
     }
 
     /* Pagination */
