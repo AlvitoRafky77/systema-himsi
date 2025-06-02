@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard'); // Show dashboard
     Route::get('/about',[HomeController::class, 'about'])->name('about'); // Show about page
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('edit');
-    Route::get('/profile/update', [ProfileController::class, 'update'])->name('update');
+    Route::post('/profile/update', [ProfileController::class, 'update'])->name('update');
 
 
     Route::get('/produk/merchandise', [ProdukController::class, 'merchandise'])->name('produk.merchandise');

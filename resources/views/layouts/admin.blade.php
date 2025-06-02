@@ -8,44 +8,48 @@
     <title>@yield('title', 'Admin Panel - Systema HIMSI')</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
     <style>
         body {
-            background: #f0f8ff; /* AliceBlue */
-            color: #212529;
+            min-height: 100vh;
+            margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .navbar {
-            background: #007bff; /* Bootstrap Primary Blue */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .navbar-nav {
-            display: flex;
-            align-items: center;
+            background: linear-gradient(135deg, #0072FF 0%, #182848 100%);
+            padding: 1rem 0;
+            position: relative;
+            z-index: 1000;
         }
 
         .navbar-brand, .nav-link {
             color: #ffffff !important;
             font-weight: 500;
+            transition: all 0.3s ease;
         }
 
         .navbar-brand:hover, .nav-link:hover {
-            color: #d4e9ff !important; /* Lighter Blue */
+            color: #d4e9ff !important;
+            transform: translateY(-1px);
+        }
+
+        .navbar-brand img {
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand:hover img {
+            transform: scale(1.05);
         }
 
         footer {
-            background: #007bff;
+            background: linear-gradient(135deg, #0072FF 0%, #182848 100%);
             color: #ffffff;
             padding: 15px 0;
             position: relative;
-            bottom: 0;
             width: 100%;
+            z-index: 1000;
         }
 
         footer p {
@@ -53,30 +57,42 @@
             font-size: 14px;
         }
 
-        .container {
-            margin-top: 5px;
+        .alert {
+            border-radius: 15px;
+            margin: 1rem;
         }
 
-        .alert {
-            border-radius: 5px;
-        }
-        html, body {
-            height: 100%;
-        }
         #app {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
+
         main {
             flex: 1;
+            width: 100%;
+            max-width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1rem;
+            }
+
+            .navbar-brand img {
+                height: 40px;
+            }
         }
     </style>
+
+    @yield('styles')
 </head>
 <body>
     <div id="app">
         {{-- Admin Navbar --}}
-        <nav class="navbar navbar-expand-md shadow-sm justify-content-center align-items-center">
+        <nav class="navbar navbar-expand-md shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
                     <img src="{{ asset('images/HIMSI LOGO.png') }}" height="50" class="me-2 align-middle">
@@ -113,16 +129,9 @@
             </div>
         </nav>
 
-        {{-- Hapus alert Bootstrap untuk pesan sukses --}}
-        {{-- @if (session('success'))
-            <div class="alert alert-success mt-3 container" role="alert">
-                {{ session('success') }}
-            </div>
-        @endif --}}
-        {{-- Pesan error validasi (jika ada) tetap sebagai alert Bootstrap --}}
         @if ($errors->any())
-            <div class="alert alert-danger mt-3 container">
-                <ul>
+            <div class="alert alert-danger">
+                <ul class="mb-0">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
@@ -130,22 +139,21 @@
             </div>
         @endif
 
-        <main class="container">
+        <main>
             @yield('content')
         </main>
 
         {{-- Admin Footer --}}
-        <footer class="text-center mt-4">
+        <footer class="text-center">
             <p>&copy; {{ date('Y') }} Systema HIMSI. All Rights Reserved.</p>
         </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // SweetAlert untuk pesan sukses
             @if(session('success'))
                 Swal.fire({
                     icon: 'success',
@@ -159,7 +167,6 @@
                 });
             @endif
 
-            // SweetAlert untuk pesan error umum
             @if(session('error'))
                 Swal.fire({
                     icon: 'error',
@@ -174,5 +181,7 @@
             @endif
         });
     </script>
+
+    @yield('scripts')
 </body>
 </html>

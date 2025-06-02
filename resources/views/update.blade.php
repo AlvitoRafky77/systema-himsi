@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1 class="mb-4">Update Profile</h1>
-    <form action="{{ route('update') }}" enctype="multipart/form-data">
+    <form action="{{ route('update') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">
