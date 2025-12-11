@@ -124,6 +124,7 @@
         border-radius: var(--border-radius);
         background: rgba(255, 255, 255, 0.9);
         transition: all 0.3s ease;
+        padding-right: 45px !important;
     }
 
     .form-control:focus {
@@ -238,21 +239,66 @@
         }
     }
 
-    .password-toggle {
-        position: absolute;
-        right: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-        background: none;
-        border: none;
-        color: #A0AEC0;
-        cursor: pointer;
-        padding: 0.5rem;
-        transition: all 0.3s ease;
+    .position-relative {
+        position: relative !important;
+        display: block;
     }
 
-    .password-toggle:hover {
+    .input-group {
+        position: relative;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .input-group .form-control {
+        position: relative;
+        flex: 1 1 auto;
+        width: 1%;
+        min-width: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .input-group-text.password-toggle {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #6B7280;
+        text-align: center;
+        white-space: nowrap;
+        background-color: #F3F4F6;
+        border: 2px solid #E2E8F0;
+        border-left: 0;
+        border-top-right-radius: var(--border-radius);
+        border-bottom-right-radius: var(--border-radius);
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .input-group-text.password-toggle:hover {
+        background-color: #E5E7EB;
         color: var(--primary-color);
+    }
+
+    .input-group-text.password-toggle:active {
+        background-color: #D1D5DB;
+    }
+
+    .input-group .form-control:focus + .input-group-text.password-toggle {
+        border-color: var(--primary-color);
+    }
+
+    .input-group .form-control:focus {
+        z-index: 3;
+    }
+
+    .input-group-text.password-toggle {
+        z-index: 2;
     }
 
     @media (max-width: 768px) {
@@ -272,6 +318,31 @@
             font-size: 1rem;
         }
     }
+
+    .password-wrapper {
+        position: relative;
+    }
+
+    .password-wrapper input {
+        width: 100%;
+        padding-right: 45px;
+    }
+
+    .show-password-button {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #666;
+        padding: 8px;
+    }
+
+    .show-password-button:hover {
+        color: #0072FF;
+    }
 </style>
 @endsection
 
@@ -290,7 +361,7 @@
             <p class="auth-subtitle">Bergabunglah dengan komunitas kami</p>
         </div>
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" id="registerForm">
             @csrf
 
             <div class="form-group">
@@ -330,7 +401,7 @@
 
             <div class="form-group">
                 <label for="password" class="form-label">Password</label>
-                <div class="position-relative">
+                <div class="password-wrapper">
                     <input type="password"
                            class="form-control @error('password') is-invalid @enderror"
                            id="password"
@@ -338,7 +409,7 @@
                            required
                            autocomplete="new-password"
                            placeholder="Masukkan password Anda">
-                    <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                    <button type="button" class="show-password-button" id="togglePassword">
                         <i class="fas fa-eye"></i>
                     </button>
                 </div>
@@ -351,7 +422,7 @@
 
             <div class="form-group">
                 <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
-                <div class="position-relative">
+                <div class="password-wrapper">
                     <input type="password"
                            class="form-control"
                            id="password_confirmation"
@@ -359,7 +430,7 @@
                            required
                            autocomplete="new-password"
                            placeholder="Masukkan ulang password Anda">
-                    <button type="button" class="password-toggle" onclick="togglePassword('password_confirmation')">
+                    <button type="button" class="show-password-button" id="togglePasswordConfirmation">
                         <i class="fas fa-eye"></i>
                     </button>
                 </div>
@@ -383,19 +454,19 @@
 
 @section('scripts')
 <script>
-    function togglePassword(inputId) {
-        const input = document.getElementById(inputId);
-        const icon = event.currentTarget.querySelector('i');
+$(document).ready(function() {
+    $('.show-password-button').on('click', function() {
+        var input = $(this).siblings('input');
+        var icon = $(this).find('i');
 
-        if (input.type === 'password') {
-            input.type = 'text';
-            icon.classList.remove('fa-eye');
-            icon.classList.add('fa-eye-slash');
+        if (input.attr('type') === 'password') {
+            input.attr('type', 'text');
+            icon.removeClass('fa-eye').addClass('fa-eye-slash');
         } else {
-            input.type = 'password';
-            icon.classList.remove('fa-eye-slash');
-            icon.classList.add('fa-eye');
+            input.attr('type', 'password');
+            icon.removeClass('fa-eye-slash').addClass('fa-eye');
         }
-    }
+    });
+});
 </script>
 @endsection

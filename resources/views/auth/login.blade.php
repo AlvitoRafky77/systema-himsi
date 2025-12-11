@@ -254,6 +254,31 @@
             font-size: 1rem;
         }
     }
+
+    .password-wrapper {
+        position: relative;
+    }
+
+    .password-wrapper input {
+        width: 100%;
+        padding-right: 45px;
+    }
+
+    .show-password-button {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #666;
+        padding: 8px;
+    }
+
+    .show-password-button:hover {
+        color: #0072FF;
+    }
 </style>
 @endsection
 
@@ -263,12 +288,13 @@
         <div class="shape1"></div>
         <div class="shape2"></div>
         <div class="shape3"></div>
+        <div class="shape4"></div>
     </div>
 
     <div class="auth-card">
         <div class="auth-header">
-            <h1 class="auth-title">Selamat Datang</h1>
-            <p class="auth-subtitle">Silakan masuk ke akun Anda</p>
+            <h1 class="auth-title">Login</h1>
+            <p class="auth-subtitle">Selamat datang kembali!</p>
         </div>
 
         <form method="POST" action="{{ route('login') }}">
@@ -294,13 +320,18 @@
 
             <div class="form-group">
                 <label for="password" class="form-label">Password</label>
-                <input type="password"
-                       class="form-control @error('password') is-invalid @enderror"
-                       id="password"
-                       name="password"
-                       required
-                       autocomplete="current-password"
-                       placeholder="Masukkan password Anda">
+                <div class="password-wrapper">
+                    <input type="password"
+                           class="form-control @error('password') is-invalid @enderror"
+                           id="password"
+                           name="password"
+                           required
+                           autocomplete="current-password"
+                           placeholder="Masukkan password Anda">
+                    <button type="button" class="show-password-button" id="togglePassword">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
                 @error('password')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -308,9 +339,18 @@
                 @enderror
             </div>
 
+            <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                    <label class="form-check-label" for="remember">
+                        Ingat Saya
+                    </label>
+                </div>
+            </div>
+
             <button type="submit" class="auth-button">
                 <i class="fas fa-sign-in-alt me-2"></i>
-                Masuk
+                Login
             </button>
 
             <div class="auth-links">
@@ -329,4 +369,23 @@
         </form>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+$(document).ready(function() {
+    $('.show-password-button').on('click', function() {
+        var input = $(this).siblings('input');
+        var icon = $(this).find('i');
+
+        if (input.attr('type') === 'password') {
+            input.attr('type', 'text');
+            icon.removeClass('fa-eye').addClass('fa-eye-slash');
+        } else {
+            input.attr('type', 'password');
+            icon.removeClass('fa-eye-slash').addClass('fa-eye');
+        }
+    });
+});
+</script>
 @endsection

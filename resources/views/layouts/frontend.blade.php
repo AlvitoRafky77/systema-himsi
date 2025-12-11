@@ -7,6 +7,11 @@
 
     <title>@yield('title', 'Systema HIMSI')</title>
 
+    {{-- Google Fonts - Poppins --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     {{-- Font Awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -27,8 +32,19 @@
             --item-spacing: 1rem;
         }
 
+        /* Global Font Settings */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
         /* Navbar Styles */
         .navbar {
+            font-family: 'Poppins', sans-serif;
             background: var(--primary-gradient);
             height: var(--navbar-height);
             backdrop-filter: blur(5px);
@@ -37,7 +53,14 @@
             padding: 0.5rem var(--section-spacing);
         }
 
+        .navbar-nav {
+            gap: 0.5rem;
+            align-items: center;
+        }
+
         .navbar-brand {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
             font-size: 1.4rem;
             transition: transform 0.3s ease;
             padding: 0.5rem 0;
@@ -50,7 +73,8 @@
         }
 
         .navbar .nav-item {
-            margin: 0 0.5rem;
+            margin: 0;
+            padding: 0 0.25rem;
         }
 
         .navbar .nav-link {
@@ -59,6 +83,9 @@
             position: relative;
             transition: all 0.3s ease;
             font-size: 0.95rem;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
         }
 
         .navbar .nav-link::after {
@@ -234,6 +261,14 @@
                 border-radius: 8px;
                 padding: 1rem;
                 margin-top: 0.5rem;
+            }
+
+            .navbar .nav-item {
+                margin: 0.25rem 0;
+            }
+
+            .navbar .nav-link {
+                padding: 0.75rem 1rem !important;
             }
 
             .search-container {
@@ -471,6 +506,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <script>
         // Initialize AOS
@@ -522,5 +558,7 @@
             @endif
         });
     </script>
+
+    @yield('scripts')
 </body>
 </html>
